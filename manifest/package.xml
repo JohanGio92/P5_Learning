@@ -94,6 +94,11 @@
 		<name>CustomTab</name>
 	</types>
 	<types>
+		<members>student/LapKHZSKsUfKumPrXldjWNjEcRtPFG</members>
+		<members>student/tpOQHtvEhdCSKYxUcfWtriQEgemIDr1</members>
+		<name>Dashboard</name>
+	</types>
+	<types>
 		<members>Educator_Home</members>
 		<members>student_home</members>
 		<name>FlexiPage</name>
@@ -116,8 +121,31 @@
 		<name>LightningComponentBundle</name>
 	</types>
 	<types>
+		<members>Answer__c.All</members>
+		<members>Module_History__c.All</members>
+		<members>Module__c.All</members>
+		<members>Question_Answer__c.All</members>
+		<members>Question__c.All</members>
+		<members>TrailModule__c.All</members>
+		<members>Trail_History__c.All</members>
+		<members>Trail__c.All</members>
+		<members>Unit_History__c.All</members>
+		<members>Unit__c.All</members>
+		<name>ListView</name>
+	</types>
+	<types>
+		<members>Rolls</members>
+		<members>Skills</members>
+		<name>ReportType</name>
+	</types>
+	<types>
 		<members>*</members>
 		<name>StaticResource</name>
+	</types>
+	<types>
+		<members>Module__c.RollSkillNotEmpty</members>
+		<members>TrailModule__c.NoLinkToInactiveModule</members>
+		<name>ValidationRule</name>
 	</types>
 	<version>55.0</version>
 </Package>
