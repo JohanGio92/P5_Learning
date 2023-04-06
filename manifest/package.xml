@@ -25,6 +25,11 @@
 		<name>AuraDefinitionBundle</name>
 	</types>
 	<types>
+		<members>Educators</members>
+		<members>Students</members>
+		<name>CustomApplication</name>
+	</types>
+	<types>
 		<members>Module_History__c.Completed_Units__c</members>
 		<members>Module_History__c.Module_Progress__c</members>
 		<members>Module_History__c.Module__c</members>
@@ -83,6 +88,28 @@
 		<members>Unit_History__c</members>
 		<members>Unit__c</members>
 		<name>CustomObject</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>CustomTab</name>
+	</types>
+	<types>
+		<members>Educator_Home</members>
+		<members>student_home</members>
+		<name>FlexiPage</name>
+	</types>
+	<types>
+		<members>Answer__c-Option Layout</members>
+		<members>Module_History__c-Module Response Layout</members>
+		<members>Module__c-Module Layout</members>
+		<members>Question_Answer__c-Question Response Layout</members>
+		<members>Question__c-Question Layout</members>
+		<members>TrailModule__c-TrailModule Layout</members>
+		<members>Trail_History__c-Trail Progress Layout</members>
+		<members>Trail__c-Trail Layout</members>
+		<members>Unit_History__c-Unit Response Layout</members>
+		<members>Unit__c-Unit Layout</members>
+		<name>Layout</name>
 	</types>
 	<types>
 		<members>*</members>
