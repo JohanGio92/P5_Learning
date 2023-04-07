@@ -3,4 +3,8 @@
 //     query text and running the command:
 //     SFDX: Execute SOQL Query with Currently Selected Text
 
-SELECT Id, Name FROM Account
+SELECT Module__c, (
+    SELECT Id, Name
+    FROM Questions__r
+) , (SELECT Id, Name FROM Unit_Responses__r)
+FROM Unit__c

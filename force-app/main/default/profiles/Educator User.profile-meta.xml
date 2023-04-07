@@ -172,6 +172,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Unit_History__c.Status__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Unit_History__c.Tries_Aux__c</field>
         <readable>false</readable>
     </fieldPermissions>
