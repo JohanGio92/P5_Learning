@@ -16,16 +16,11 @@ public class UnitService {
     }
 
     public Boolean registerUnitHistory(Id unitId, String jsonAnswer){
-        try {
-            this.queryUnit(unitId);
-            this.createModuleHistory();
-            this.createUnitHistory(unitId);
-            this.upsertQuestionAnswers(jsonAnswer);
-        } catch (DmlException dmlException) {
-            Database.rollback(savepoint);
-            throw dmlException;
-        }
-        return true;
+        this.queryUnit(unitId);
+        this.createModuleHistory();
+        this.createUnitHistory(unitId);
+        this.upsertQuestionAnswers(jsonAnswer);
+        return this.unitHistory.Unit_Completed__c;
     }
 
     private void queryUnit(Id unitId){
@@ -60,8 +55,9 @@ public class UnitService {
             moduleHistory.User__c = CURRENT_USER;
             moduleHistory.Module__c = unit.Module__c;
             moduleHistory.Status__c = 'In Progress';
-            insert this.moduleHistory;
         }
+
+        insert this.moduleHistory;
     }
 
     private void createUnitHistory(Id unitId){
@@ -70,9 +66,12 @@ public class UnitService {
             Module_History__c = this.moduleHistory.Id,
             Status__c = 'Draft'
         );
-        //if (!this.unit.Unit_Responses__r.isEmpty()) {
-        //    this.unitHistory.Tries__c = this.unit.Unit_Responses__r[0].Tries__c + 1;
-        //}
+
+        if (!this.unit.Unit_Responses__r.isEmpty()) {
+            this.unitHistory.TriesNumber__c = this.unit.Unit_Responses__r[0].TriesNumber__c + 1;
+        } else {
+            this.unitHistory.TriesNumber__c = 1;
+        }
 
         insert this.unitHistory;
     }
