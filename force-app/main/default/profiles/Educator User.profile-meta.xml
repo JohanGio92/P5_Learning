@@ -14,6 +14,10 @@
         <apexClass>ModuleHistoryTrigger</apexClass>
         <enabled>false</enabled>
     </classAccesses>
+    <classAccesses>
+        <apexClass>UnitService</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
     <custom>true</custom>
     <fieldPermissions>
         <editable>true</editable>
@@ -173,6 +177,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Unit_History__c.Status__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Unit_History__c.TriesNumber__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>

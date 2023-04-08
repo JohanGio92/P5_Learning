@@ -65,6 +65,7 @@
 		<members>Unit_History__c.Obtained_Points__c</members>
 		<members>Unit_History__c.Points__c</members>
 		<members>Unit_History__c.Status__c</members>
+		<members>Unit_History__c.TriesNumber__c</members>
 		<members>Unit_History__c.Tries_Aux__c</members>
 		<members>Unit_History__c.Tries__c</members>
 		<members>Unit_History__c.Unit_Completed__c</members>
