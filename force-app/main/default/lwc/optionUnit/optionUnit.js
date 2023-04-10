@@ -13,6 +13,8 @@ export default class OptionUnit extends LightningElement {
 			this.options.forEach(option => {
 				this._radioOptions.push({label: option.Description__c, value: option.Id})
 			});
+			this.value = this._radioOptions[0].value;
+			this.selectedOption = {[this.questionId]: this.value};
 		}
 		return this._radioOptions;
 	}

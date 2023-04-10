@@ -9,6 +9,7 @@ export default class UnitContent extends LightningElement {
     name;
     points;
     time;
+	isCompletedUnit;
 
     @wire(getUnitWrapper, {unitId:'$recordId'})
     unitdata(Result){
@@ -46,25 +47,28 @@ export default class UnitContent extends LightningElement {
 
 
 
-    handleSubmit(event){
+    handleSubmit(event) {
 		event.preventDefault();
 		let optionUnits = this.template.querySelectorAll('c-option-unit');
-		let jsonAnswer = {};
+		let _jsonAnswer = {};
 
 		for (const optionUnit of optionUnits) {
-			jsonAnswer = {... jsonAnswer, ...optionUnit.selectedOption};
+			_jsonAnswer = {... _jsonAnswer, ...optionUnit.selectedOption};
 		}
-		jsonAnswer = JSON.stringify(jsonAnswer);
-		console.log(jsonAnswer);
 
-        registerUserAnswer({
-            unitId: this.recordId,
-            jsonAnswer: jsonAnswer
-            
-        })
+		_jsonAnswer = JSON.stringify(_jsonAnswer);
+		console.log(_jsonAnswer);
+
+        registerUserAnswer({ unitId: this.recordId, jsonAnswer: _jsonAnswer})
+		.then((result) => {
+			console.log('succesfully');
+			this.isCompletedUnit = result
+		})
         .catch((error)=>{
+			console.log('has an error');
             console.log(error)
         });
+		console.log(this.isCompletedUnit);
     }
 
 }

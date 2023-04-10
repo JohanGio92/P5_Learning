@@ -3,8 +3,6 @@
 //     query text and running the command:
 //     SFDX: Execute SOQL Query with Currently Selected Text
 
-SELECT Id, Unit__r.Points__c, (
-                SELECT Id, Option__r.IsCorrect__c
-                FROM Question_Answer__r
-            )
-            FROM Unit_History__c
+SELECT Id
+FROM Module_History__c
+WHERE Status__c = 'Completed'

@@ -12,14 +12,18 @@ public with sharing class UnitService {
         this.unit = null;
         this.moduleHistory = null;
         this.unitHistory = null;
-        this.savePoint = Database.setSavepoint();
     }
 
     public Boolean registerUnitHistory(Id unitId, String jsonAnswer){
-        this.queryUnit(unitId);
-        this.createModuleHistory();
-        this.createUnitHistory(unitId);
-        this.upsertQuestionAnswers(jsonAnswer);
+        //this.savePoint = Database.setSavepoint();
+        try {
+            this.queryUnit(unitId);
+            this.createModuleHistory();
+            this.createUnitHistory(unitId);
+            this.upsertQuestionAnswers(jsonAnswer);
+        } catch (DmlException dmlException) {
+            Database.rollback(savepoint);
+        }
         return this.unitHistory.Unit_Completed__c;
     }
 
@@ -31,7 +35,7 @@ public with sharing class UnitService {
             ),(
                 SELECT Id, Tries__c
                 FROM Unit_Responses__r
-                WHERE Module_History__r.User__c =: CURRENT_USER
+                WHERE Module_History__r.User__c =: UserInfo.getUserId()
                 ORDER BY Tries__c DESC
                 LIMIT 1
             )
@@ -42,20 +46,21 @@ public with sharing class UnitService {
     }
 
     private void createModuleHistory() {
-        this.moduleHistory = [
-            SELECT Id
-            FROM Module_History__c
-            WHERE Module__c =: this.unit.Module__c AND 
-                    User__c =: CURRENT_USER AND 
-                    Status__c = 'In Progress'
-        ];
+        //this.moduleHistory = [
+        //    SELECT Id
+        //    FROM Module_History__c
+        //    WHERE Module__c =: this.unit.Module__c AND 
+        //            User__c =: CURRENT_USER AND 
+        //            Status__c = 'In Progress'
+        //];
 
-        if (moduleHistory == null) {
+        //if (moduleHistory == null) {
+            System.debug('linea 58: ' + this.unit.Module__c);
             this.moduleHistory = new Module_History__c();
-            moduleHistory.User__c = CURRENT_USER;
-            moduleHistory.Module__c = unit.Module__c;
+            moduleHistory.User__c = UserInfo.getUserId();
+            moduleHistory.Module__c = this.unit.Module__c;
             moduleHistory.Status__c = 'In Progress';
-        }
+        //}
 
         insert this.moduleHistory;
     }
