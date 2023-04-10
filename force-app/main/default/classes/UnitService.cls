@@ -1,4 +1,4 @@
-public class UnitService {
+public with sharing class UnitService {
 
     private final static String CURRENT_USER = UserInfo.getUserId(); 
     private Unit__c unit;
@@ -100,6 +100,30 @@ public class UnitService {
 
     private Map<Id,Id> parseJSON(String jsonAnswer){
         return (Map<Id,Id>) JSON.deserializeStrict(jsonAnswer, Map<Id,Id>.class);
+    }
+    
+    public class UnitWrapper{
+        @AuraEnabled
+        public Unit__c unit;
+        @AuraEnabled
+        public List<Question__c> questions;
+        
+        public UnitWrapper(Unit__c unit, List<Question__c> questions){
+            this.unit = unit;
+            this.questions = questions;
+        }
+    }
+    
+    @AuraEnabled(cacheable=true)
+    public static UnitWrapper getUnit(Id unitId){
+        Unit__c unit = [SELECT Id, Name, Time_Estimate__c, Points__c FROM Unit__c WHERE Id =: unitId ];
+        
+        List<Question__c> questions = [SELECT Id, Name, Content__c,(SELECT Id, Name, Description__c, IsCorrect__c FROM Options__r)
+                                      FROM Question__c
+                                      WHERE Unit__c =: unitId
+                                      ];
+        
+        return new UnitWrapper(unit, questions);
     }
 
 }
