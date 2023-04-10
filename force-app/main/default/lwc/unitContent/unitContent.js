@@ -1,6 +1,6 @@
 import { LightningElement, api, wire, track } from 'lwc';
 import getUnitWrapper from '@salesforce/apex/UnitService.getUnit';
-import registerUserAnswer from '@salesforce/apex/JSController.registerUserAnswer';
+import registerUserAnswer from '@salesforce/apex/UnitService.registerUnitHistory';
 
 export default class UnitContent extends LightningElement {
     @api recordId

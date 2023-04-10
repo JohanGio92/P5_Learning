@@ -1,34 +1,32 @@
 public with sharing class UnitService {
 
-    private final static String CURRENT_USER = UserInfo.getUserId(); 
-    private Unit__c unit;
-    private Module_History__c moduleHistory;
-    private Unit_History__c unitHistory;
-    private Savepoint savePoint;
+    //private final static String CURRENT_USER = UserInfo.getUserId(); 
+    private static Unit__c unit;
+    private static Module_History__c moduleHistory;
+    private static Unit_History__c unitHistory;
+    private static Savepoint savePoint;
 
     public class CustomException extends Exception {}
 
     public UnitService() {
-        this.unit = null;
-        this.moduleHistory = null;
-        this.unitHistory = null;
     }
 
-    public Boolean registerUnitHistory(Id unitId, String jsonAnswer){
-        //this.savePoint = Database.setSavepoint();
+    @AuraEnabled
+    public static Boolean registerUnitHistory(Id unitId, String jsonAnswer){
+        savePoint = Database.setSavepoint();
         try {
-            this.queryUnit(unitId);
-            this.createModuleHistory();
-            this.createUnitHistory(unitId);
-            this.upsertQuestionAnswers(jsonAnswer);
+            queryUnit(unitId);
+            createModuleHistory();
+            createUnitHistory(unitId);
+            upsertQuestionAnswers(jsonAnswer);
         } catch (DmlException dmlException) {
             Database.rollback(savepoint);
         }
-        return this.unitHistory.Unit_Completed__c;
+        return unitHistory.Unit_Completed__c;
     }
 
-    private void queryUnit(Id unitId){
-        this.unit = [
+    private static void queryUnit(Id unitId){
+        unit = [
             SELECT Module__c, (
                 SELECT Id, Name
                 FROM Questions__r
@@ -45,51 +43,51 @@ public with sharing class UnitService {
         ];
     }
 
-    private void createModuleHistory() {
-        //this.moduleHistory = [
-        //    SELECT Id
-        //    FROM Module_History__c
-        //    WHERE Module__c =: this.unit.Module__c AND 
-        //            User__c =: CURRENT_USER AND 
-        //            Status__c = 'In Progress'
-        //];
+    private static void createModuleHistory() {
+        moduleHistory = [
+            SELECT Id
+            FROM Module_History__c
+            WHERE Module__c =: unit.Module__c AND 
+                    User__c =: UserInfo.getUserId() AND 
+                    Status__c = 'In Progress'
+        ];
 
-        //if (moduleHistory == null) {
-            System.debug('linea 58: ' + this.unit.Module__c);
-            this.moduleHistory = new Module_History__c();
+        if (moduleHistory == null) {
+            moduleHistory = new Module_History__c();
             moduleHistory.User__c = UserInfo.getUserId();
-            moduleHistory.Module__c = this.unit.Module__c;
+            moduleHistory.Module__c = unit.Module__c;
             moduleHistory.Status__c = 'In Progress';
-        //}
+        }
+        System.debug('moduleHistory' + moduleHistory);
 
-        insert this.moduleHistory;
+        insert moduleHistory;
     }
 
-    private void createUnitHistory(Id unitId){
-        this.unitHistory = new Unit_History__c(
+    private static void createUnitHistory(Id unitId){
+        unitHistory = new Unit_History__c(
             Unit__c = unitId,
-            Module_History__c = this.moduleHistory.Id,
+            Module_History__c = moduleHistory.Id,
             Status__c = 'Draft'
         );
 
-        if (!this.unit.Unit_Responses__r.isEmpty()) {
-            this.unitHistory.TriesNumber__c = this.unit.Unit_Responses__r[0].TriesNumber__c + 1;
+        if (!unit.Unit_Responses__r.isEmpty()) {
+            unitHistory.TriesNumber__c = unit.Unit_Responses__r[0].TriesNumber__c + 1;
         } else {
-            this.unitHistory.TriesNumber__c = 1;
+            unitHistory.TriesNumber__c = 1;
         }
 
-        insert this.unitHistory;
+        insert unitHistory;
     }
 
-    private void upsertQuestionAnswers(String jsonAnswer) {
-        Map<Id,Id> answerMap = this.parseJSON(jsonAnswer);
+    private static void upsertQuestionAnswers(String jsonAnswer) {
+        Map<Id,Id> answerMap = parseJSON(jsonAnswer);
         List<Question_Answer__c> questionAnswers = new List<Question_Answer__c>();
 
-        for (Question__c question: this.unit.Questions__r) {
+        for (Question__c question: unit.Questions__r) {
             if (answerMap.containsKey(question.Id)) {
                 Question_Answer__c questionAnswer = new Question_Answer__c();
                 questionAnswer.Question__c = question.Id;
-                questionAnswer.Unit_History__c = this.unitHistory.Id;
+                questionAnswer.Unit_History__c = unitHistory.Id;
                 questionAnswer.Option__c = answerMap.get(question.Id);
                 questionAnswers.add(questionAnswer);
             } else {
@@ -99,11 +97,11 @@ public with sharing class UnitService {
         }
 
         insert questionAnswers;
-        this.unitHistory.Status__c = 'Answered';
-        update this.unitHistory;
+        unitHistory.Status__c = 'Answered';
+        update unitHistory;
     }
 
-    private Map<Id,Id> parseJSON(String jsonAnswer){
+    private static Map<Id,Id> parseJSON(String jsonAnswer){
         return (Map<Id,Id>) JSON.deserializeStrict(jsonAnswer, Map<Id,Id>.class);
     }
     
