@@ -47,9 +47,19 @@ export default class UnitContent extends LightningElement {
 
 
     handleSubmit(event){
+		event.preventDefault();
+		let optionUnits = this.template.querySelectorAll('c-option-unit');
+		let jsonAnswer = {};
+
+		for (const optionUnit of optionUnits) {
+			jsonAnswer = {... jsonAnswer, ...optionUnit.selectedOption};
+		}
+		jsonAnswer = JSON.stringify(jsonAnswer);
+		console.log(jsonAnswer);
+
         registerUserAnswer({
             unitId: this.recordId,
-            jsonAnswer: JSON.stringify(this.optionSelectedjson)
+            jsonAnswer: jsonAnswer
             
         })
         .catch((error)=>{
