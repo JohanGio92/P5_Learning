@@ -1,18 +1,63 @@
-# Salesforce DX Project: Next Steps
+# Project Pair Programming P5 E-Learning
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+## Table of Content
 
-## How Do You Plan to Deploy Your Changes?
+- [Members](#members)
+- [Data Model](#data-model)
+- [Flows](#flows)
+    - [Trail Module Point in Time](#trail-module-point-in-time)
+    - [Skill Skeleton](#skill-skeleton)
+    - [Rollup Summary Total User Point](#rollup-summary-total-user-point)
+    - [Email Module History](#email-module-history)
+    - [Sum of Completed Units from Module History](#sum-of-completed-units-from-module-history)
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+## Members
 
-## Configure Your Salesforce DX Project
+- Johan Revilla
+- Alan Duran
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+## Data Model
 
-## Read All About It
+![data model](./img/P5_Learning.svg)
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+## Flows
+
+### Trail Module Point in Time
+
+Since it is not possible to do a rollup summary from child to parent, this flow is
+an assistant.
+I transfer the data of Points, Time and number of units from the
+Modulo object to TrailModulo, to then be able to rollup
+summary from Trail to TrailModulo getting the necessary information to
+total the points, time and number of units of each Trail.
+
+![point in time flow](./img/pointInTime.png)
+
+### Skill Skeleton
+
+This Screen Flow allows you to select a skill and from the selection
+show modules associated with that skill.
+
+![skill selection](./img/skillSelection.png)
+
+### Rollup Summary Total User Point
+
+According to the Salesforce documentation, the standard User object cannot
+be part of a master-detail relationship, this way we don't have
+the option of making a RollUp Summary is available, so it is resolved
+with this flow. The sum of points of a user is obtained
+determined from ModuleHistory.
+
+![roll up summary](./img/rollup.png)
+
+### Email Module History
+
+Send an email and update the status of the module to Completed, at the end of it.
+
+![send email](./img/email.png)
+
+### Sum of Completed Units from Module History
+
+Calculate the number of units completed for each module.
+
+![Sum of Completed Unit](./img/sumOfCompletedUnit.png)
