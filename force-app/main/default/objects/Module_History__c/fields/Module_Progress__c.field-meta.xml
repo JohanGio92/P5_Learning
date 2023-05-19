@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Module_Progress__c</fullName>
     <externalId>false</externalId>
-    <formula>Completed_Units__c  /  Module__r.Unit_Quantity__c</formula>
+    <formula>CompletedUnits__c  /  Module__r.Unit_Quantity__c</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Module Progress</label>
     <precision>18</precision>

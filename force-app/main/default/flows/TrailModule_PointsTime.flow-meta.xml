@@ -40,6 +40,12 @@
                 <elementReference>$Record.Module__r.Total_Time_Estimate__c</elementReference>
             </value>
         </inputAssignments>
+        <inputAssignments>
+            <field>UnitQuantity__c</field>
+            <value>
+                <elementReference>$Record.Module__r.Unit_Quantity__c</elementReference>
+            </value>
+        </inputAssignments>
         <inputReference>$Record</inputReference>
     </recordUpdates>
     <start>

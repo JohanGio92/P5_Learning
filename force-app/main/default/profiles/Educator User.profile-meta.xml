@@ -42,9 +42,9 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>Module_History__c.Completed_Units__c</field>
-        <readable>false</readable>
+        <editable>true</editable>
+        <field>Module_History__c.CompletedUnits__c</field>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -148,6 +148,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>TrailModule__c.UnitQuantity__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Trail_History__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -175,6 +180,11 @@
         <editable>false</editable>
         <field>Trail__c.Time_Estimated__c</field>
         <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Trail__c.UnitQuantity__c</field>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -251,6 +261,10 @@
     <flowAccesses>
         <enabled>false</enabled>
         <flow>Skill_Selection</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Sum_Completed_Units_Module_History</flow>
     </flowAccesses>
     <flowAccesses>
         <enabled>false</enabled>

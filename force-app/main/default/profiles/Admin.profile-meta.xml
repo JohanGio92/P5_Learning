@@ -42,8 +42,8 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>Module_History__c.Completed_Units__c</field>
+        <editable>true</editable>
+        <field>Module_History__c.CompletedUnits__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -148,6 +148,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>TrailModule__c.UnitQuantity__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Trail_History__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -174,6 +179,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Trail__c.Time_Estimated__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Trail__c.UnitQuantity__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -254,6 +264,10 @@
     </flowAccesses>
     <flowAccesses>
         <enabled>false</enabled>
+        <flow>Sum_Completed_Units_Module_History</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
         <flow>TrailModule_PointsTime</flow>
     </flowAccesses>
     <layoutAssignments>
@@ -286,6 +300,11 @@
     <layoutAssignments>
         <layout>Unit__c-Unit Layout</layout>
     </layoutAssignments>
+    <loginIpRanges>
+        <description>p5</description>
+        <endAddress>255.255.255.255</endAddress>
+        <startAddress>0.0.0.0</startAddress>
+    </loginIpRanges>
     <objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>true</allowDelete>

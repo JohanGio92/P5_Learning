@@ -23,6 +23,10 @@
                 <behavior>Readonly</behavior>
                 <field>Time_Estimated__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>UnitQuantity__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

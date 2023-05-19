@@ -6,7 +6,11 @@
     <columns>Points__c</columns>
     <columns>Unit_Completed__c</columns>
     <columns>Tries__c</columns>
+    <columns>CREATEDBY_USER</columns>
     <columns>Unit__c</columns>
+    <columns>TriesNumber__c</columns>
+    <columns>Status__c</columns>
+    <columns>Obtained_Points__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>

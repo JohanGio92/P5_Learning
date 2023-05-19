@@ -1,5 +1,6 @@
 import { LightningElement, api, wire, track } from 'lwc';
 import getUnitWrapper from '@salesforce/apex/UnitService.getUnit';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import registerUserAnswer from '@salesforce/apex/UnitService.registerUnitHistory';
 
 export default class UnitContent extends LightningElement {
@@ -9,17 +10,22 @@ export default class UnitContent extends LightningElement {
     name;
     points;
     time;
-	isCompletedUnit;
+	isCompletedUnit=false;
+
+    connectedcallback(){ console.log(isCompletedUnit) };
 
     @wire(getUnitWrapper, {unitId:'$recordId'})
     unitdata(Result){
         const { data, error } = Result;
 
         if(data){
+            console.log('Completed ' + data);
             this.unit = data.unit;
             this.questions = data.questions;
             this.points = data.unit.Points__c;
             this.time = data.unit.Time_Estimate__c;
+            this.isCompletedUnit = data.completed;
+            console.log('Unidad Completada ' + this.isCompletedUnit);
 
         }   else if (error) {
             this.error = error;
@@ -61,14 +67,41 @@ export default class UnitContent extends LightningElement {
 
         registerUserAnswer({ unitId: this.recordId, jsonAnswer: _jsonAnswer})
 		.then((result) => {
-			console.log('succesfully');
-			this.isCompletedUnit = result
+			console.log('succesfully ' + result);
+			this.isCompletedUnit = result;
+            if(this.isCompletedUnit){
+                this.showSuccessToast();               
+            }else{
+                this.showErrorToast();
+                
+            }
+            
 		})
         .catch((error)=>{
 			console.log('has an error');
             console.log(error)
         });
 		console.log(this.isCompletedUnit);
+        
     }
 
+    showErrorToast() {
+        const evt = new ShowToastEvent({
+            title: 'Do it again',
+            message: 'Your answer was incorrect',
+            variant: 'error',
+            mode: 'dismissable'
+        });
+        this.dispatchEvent(evt);
+    }
+    
+    showSuccessToast() {
+        const evt = new ShowToastEvent({
+            title: 'Congratulations',
+            message: 'Your answer was correct',
+            variant: 'success',
+            mode: 'dismissable'
+        });
+        this.dispatchEvent(evt);
+    }
 }

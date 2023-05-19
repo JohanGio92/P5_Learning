@@ -8,11 +8,6 @@
     <sections>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Completed_Units__c</field>
-            <table>Module_History__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>CreatedBy</field>
             <table>Module_History__c</table>
         </columns>
@@ -74,6 +69,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Module__c.Skills__c</field>
+            <table>Module_History__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>CompletedUnits__c</field>
             <table>Module_History__c</table>
         </columns>
         <masterLabel>Modules History</masterLabel>

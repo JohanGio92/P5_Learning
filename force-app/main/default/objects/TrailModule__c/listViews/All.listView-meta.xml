@@ -6,6 +6,7 @@
     <columns>Points__c</columns>
     <columns>Trail__c</columns>
     <columns>Module__c</columns>
+    <columns>UnitQuantity__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>

@@ -77,6 +77,11 @@
     <tabs>Trail__c</tabs>
     <tabs>Module__c</tabs>
     <tabs>Unit__c</tabs>
+    <tabs>Module_History__c</tabs>
+    <tabs>Trail_History__c</tabs>
+    <tabs>Unit_History__c</tabs>
+    <tabs>Question_Answer__c</tabs>
+    <tabs>TrailModule__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Alumnos_UtilityBar</utilityBar>
 </CustomApplication>

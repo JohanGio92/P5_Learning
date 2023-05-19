@@ -29,17 +29,44 @@
         <type>Flexipage</type>
         <profile>Admin</profile>
     </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Trail_Record_Page1</content>
+        <formFactor>Small</formFactor>
+        <pageOrSobjectType>Trail__c</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Educator</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Trail_Record_Page1</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Trail__c</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Educator</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Trail_Record_Page1</content>
+        <formFactor>Small</formFactor>
+        <pageOrSobjectType>Trail__c</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Trail_Record_Page1</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Trail__c</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Admin</profile>
+    </profileActionOverrides>
     <tabs>standard-home</tabs>
     <tabs>Trail__c</tabs>
     <tabs>Module__c</tabs>
     <tabs>Unit__c</tabs>
     <tabs>Question__c</tabs>
     <tabs>Answer__c</tabs>
-    <tabs>TrailModule__c</tabs>
-    <tabs>Module_History__c</tabs>
-    <tabs>Unit_History__c</tabs>
-    <tabs>Question_Answer__c</tabs>
-    <tabs>Trail_History__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Educators_UtilityBar</utilityBar>
 </CustomApplication>
